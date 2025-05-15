@@ -1,3 +1,8 @@
+# Nie in main eigentlich arbeiten, immer nur in
+    # develop oder *        --> dann in main und git merge develop 
+    # feature/*             --> dann in develop und git merge feature/*
+
+
 # develop-Branch erstellen
 git checkout -b develop
 git push -u origin develop
