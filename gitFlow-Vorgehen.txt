@@ -1,0 +1,15 @@
+# develop-Branch erstellen
+git checkout -b develop
+git push -u origin develop
+
+# feature-Branch starten
+git checkout -b feature/xyz
+
+# Änderungen committen und mergen
+git add .
+git commit -m "Feature xyz"
+git checkout develop
+git merge feature/xyz
+
+# feature-Branch löschen
+git branch -d feature/xyz
