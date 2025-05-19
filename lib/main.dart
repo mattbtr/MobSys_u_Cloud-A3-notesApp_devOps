@@ -3,18 +3,30 @@ import 'package:flutter_empty_application_1/pages/auth_logic.dart';   // import 
 //import 'pages/home_screen.dart';
 //import 'pages/add_notes_screen.dart';
 import 'package:firebase_core/firebase_core.dart';  // Firebase Core Package für Firebase App in Flutter
-import 'firebase_options.dart';   // enthält Firebase-Prohjekt-Konfiguration
+//import 'firebase_options.dart';   // enthält Firebase-Prohjekt-Konfiguration
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'firebase_options_env.dart'; // ersetzt firebase_options.dart
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();  
   // Sorgt dafür, dass alle Widgets und Dienste bevor Firebase initialisiert wird.
   // Wichtig bei asynchronem Code wie Firebase.initializeApp() 
-  await Firebase.initializeApp(         // Firebase Projekt initialisieren
-    options: DefaultFirebaseOptions.currentPlatform,
-    // Verwendet die automatisch generierte Konfiguration aus firebase_options.dart
+
+  await dotenv.load(fileName: '.env');
+
+  try{
+    if(Firebase.apps.isEmpty){
+      await Firebase.initializeApp(         // Firebase Projekt initialisieren
+        options: FirebaseOptionsEnv.currentPlatform,
+    // Verwendet die manuelle Konfiguration aus firebase_options_env.dart die die WErte aus .env nimmt
     // (enthält u. a. API-Key, Projekt-ID etc.)
-);
+      );
+    }
+  } catch(e){
+    print('Firebase init error: $e');
+  }
+  
 
 runApp(const MainApp());
 
