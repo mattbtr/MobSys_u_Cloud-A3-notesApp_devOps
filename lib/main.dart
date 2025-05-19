@@ -6,7 +6,8 @@ import 'package:firebase_core/firebase_core.dart';  // Firebase Core Package fü
 //import 'firebase_options.dart';   // enthält Firebase-Prohjekt-Konfiguration
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'firebase_options_env.dart'; // ersetzt firebase_options.dart
-
+import 'package:logger/logger.dart';
+final logger = Logger();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();  
@@ -24,7 +25,9 @@ void main() async {
       );
     }
   } catch(e){
-    print('Firebase init error: $e');
+    //print('Firebase init error: $e');
+    logger.e('Firebase init error: $e');
+
   }
   
 

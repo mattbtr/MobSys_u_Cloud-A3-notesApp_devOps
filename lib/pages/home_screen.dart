@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'add_notes_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:logger/logger.dart';
 
 class HomeScreen extends StatelessWidget{
   
   const HomeScreen({super.key});
 
+  static final logger = Logger();
   /*
   //final List<String> dummyNotes = [
     'Einkaufsliste schreiben',
@@ -16,7 +18,8 @@ class HomeScreen extends StatelessWidget{
   */
 
   void logout(){
-    print("Aktuelle UID: ${FirebaseAuth.instance.currentUser?.uid}");
+    //print("Aktuelle UID: ${FirebaseAuth.instance.currentUser?.uid}");
+    HomeScreen.logger.i("Aktuelle UID: ${FirebaseAuth.instance.currentUser?.uid}");
     FirebaseAuth.instance.signOut();
   }
 
