@@ -35,6 +35,9 @@ jobs:
       continue-on-error: true
       run: flutter test
 
+    - name: Locate sdkmanager
+      run: find /usr/local/lib/android/sdk -name sdkmanager
+
     - name: Accept Android SDK licenses
       run: yes | /usr/local/lib/android/sdk/tools/bin/sdkmanager --licenses
 
