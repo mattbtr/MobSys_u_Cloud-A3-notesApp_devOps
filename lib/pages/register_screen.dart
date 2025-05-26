@@ -6,12 +6,15 @@ class RegisterScreen extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  RegisterScreen({super.key});
+  final FirebaseAuth auth;
+
+  RegisterScreen({super.key, FirebaseAuth? auth})
+    : auth = auth ?? FirebaseAuth.instance;
 
   // Registrierungs-Logik (Funktion)
   void register(BuildContext context) async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await auth.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
         );

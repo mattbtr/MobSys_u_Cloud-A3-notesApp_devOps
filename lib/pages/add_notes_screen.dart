@@ -6,11 +6,17 @@ class AddNoteScreen extends StatefulWidget {
   final String? existingNoteId;
   final String? initialText;
 
-  const AddNoteScreen({
+  final FirebaseAuth auth;
+  final FirebaseFirestore firestore;
+
+  AddNoteScreen({
     super.key,
     this.existingNoteId,
     this.initialText,
-    });
+    FirebaseFirestore? firestore,
+    FirebaseAuth? auth,
+  }) : firestore = firestore ?? FirebaseFirestore.instance,
+       auth = auth ?? FirebaseAuth.instance;
 
   @override
   AddNoteScreenState createState() => AddNoteScreenState();
@@ -18,7 +24,6 @@ class AddNoteScreen extends StatefulWidget {
 
 class AddNoteScreenState extends State<AddNoteScreen> {
   late TextEditingController _controller; //TextEditingController mit einem Wert initialisieren, der erst im initState() verfügbar ist
-  final user = FirebaseAuth.instance.currentUser;
 
   @override
   void initState() {
@@ -29,11 +34,13 @@ class AddNoteScreenState extends State<AddNoteScreen> {
 
   void _saveNote() async {
     final text = _controller.text;
+    final user = widget.auth.currentUser;
+
     if(text.isNotEmpty){
 
       if (widget.existingNoteId != null){
         // Update der vorhandenen Notiz:
-        await FirebaseFirestore.instance
+        await widget.firestore
         .collection('notes')
         .doc(widget.existingNoteId)
         .update({
@@ -44,7 +51,7 @@ class AddNoteScreenState extends State<AddNoteScreen> {
       } else{
         // Sonst: neue Notiz
         // Notiz abn Firebase schicken und in Firebase speichern 
-        await FirebaseFirestore.instance.collection('notes').add({
+        await widget.firestore.collection('notes').add({
           'text': text,
           'timestamp': FieldValue.serverTimestamp(),
           'userId': user?.uid,

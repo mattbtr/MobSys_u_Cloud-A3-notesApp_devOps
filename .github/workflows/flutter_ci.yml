@@ -29,5 +29,15 @@ jobs:
     - name: Analyze Code
       run: flutter analyze
 
-    - name: Run tests (unit tests)
+    - name: Run tests (unit tests+widget tests)
       run: flutter test
+
+    - name: Build Android APK
+      run: flutter build apk --release
+
+    - name: Upload APK as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: android-apk
+        path: build/app/outputs/flutter-apk/app-release.apk
+

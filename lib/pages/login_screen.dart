@@ -4,17 +4,21 @@ import 'register_screen.dart';          // Import der RegisterPage, damit mit Bu
 
 class LoginScreen extends StatelessWidget{
 
+  // Firbase Auth Objekt
+  final FirebaseAuth auth;
+
   // Controller für die Texteingabe in den E-Mail- und Passwortfeldern
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  LoginScreen({super.key});
+  LoginScreen({super.key, FirebaseAuth? auth})       //optionaler Parameter --> FirebaseAuth?
+    : auth = auth ?? FirebaseAuth.instance;                                                                  // Wert übergeben wurde (z. B. ein MockFirebaseAuth), dann wird dieser verwendet
 
   // Login-Funktion
   void login(BuildContext context) async {
 
     try{
-      await FirebaseAuth.instance.signInWithEmailAndPassword(   // Authentication simpel mit Email und Passwort (gibt auch andere Auth-Methode, die man aktivieren kann in Firebase !!)
+      await auth.signInWithEmailAndPassword(   // Authentication simpel mit Email und Passwort (gibt auch andere Auth-Methode, die man aktivieren kann in Firebase !!)
 
         email: emailController.text.trim(),       // holt Text aus dem Textfeld für Email (vgl Zeile 38)
         password: passwordController.text.trim(),     // .trim() entfernt Leerzeichen vorne und hinten ams String

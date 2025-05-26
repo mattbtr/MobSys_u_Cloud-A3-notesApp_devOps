@@ -9,6 +9,7 @@ git push -u origin develop
 
 # feature-Branch starten
 git checkout -b feature/xyz
+git merge develop   # auf aktuellen stand holen
 
 # Änderungen committen und mergen
 git add .
