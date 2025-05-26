@@ -39,7 +39,7 @@ jobs:
       run: find /usr/local/lib/android/sdk -name sdkmanager
 
     - name: Accept Android SDK licenses
-      run: yes | /usr/local/lib/android/sdk/tools/bin/sdkmanager --licenses
+      run: yes | /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
 
     - name: Build Android APK
       run: flutter build apk --release
