@@ -30,9 +30,9 @@ class RegisterScreen extends StatelessWidget {
           message = 'E-Mail is already in use.';
           break;
         case 'invalid-email':
-          message= 'E-Mail is already in use.';
+          message= 'E-Mail is not valid.';
           break;
-        case 'weak password':
+        case 'weak-password':
           message= 'password is too weak.';
           break;
         default:

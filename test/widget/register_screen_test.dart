@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:flutter_empty_application_1/pages/register_screen.dart';
 
+
 void main() {
   group('RegisterScreen', () {
     testWidgets('zeigt Fehlermeldung bei bereits registrierter E-Mail', (
