@@ -2,7 +2,7 @@ name: Flutter CI
 
 on:
   push:
-    branches: [main, develop, feature/env]
+    branches: [main, develop, feature/devops]
   pull_request:
     branches: [main, develop]
   workflow_dispatch: # erlaubt manuelles Starten im GitHub-UI
