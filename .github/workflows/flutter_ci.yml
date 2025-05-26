@@ -36,7 +36,7 @@ jobs:
       run: flutter test
 
     - name: Accept Android SDK licenses
-      run: yes | sdkmanager --licenses  
+      run: yes | /usr/local/lib/android/sdk/tools/bin/sdkmanager --licenses
 
     - name: Build Android APK
       run: flutter build apk --release
