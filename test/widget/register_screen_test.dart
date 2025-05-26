@@ -27,7 +27,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Der zweite Registrierversuch mit gleicher E-Mail sollte fehlschlagen
-      expect(find.textContaining('Registration failed'), findsOneWidget);
+      expect(find.textContaining('E-Mail is already in use.'), findsOneWidget);
     });
 
     testWidgets('erfolgreiche Registrierung zeigt keine Fehlermeldung', (

@@ -22,8 +22,25 @@ class RegisterScreen extends StatelessWidget {
          if (!context.mounted) return; // schützt vor ungültigem Kontext
 
       Navigator.pop(context);
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Resistration failed: $e')));
+    } on FirebaseAuthException catch (e) {
+      String message;
+
+      switch(e.code){
+        case 'email-already-in-use':
+          message = 'E-Mail is already in use.';
+          break;
+        case 'invalid-email':
+          message= 'E-Mail is already in use.';
+          break;
+        case 'weak password':
+          message= 'password is too weak.';
+          break;
+        default:
+          message = 'Registration failed';
+      }
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+    } catch(e){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Unknown exception: $e')));
     }
   }
 
