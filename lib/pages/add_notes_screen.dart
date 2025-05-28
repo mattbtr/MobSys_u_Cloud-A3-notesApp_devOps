@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_performance/firebase_performance.dart';
+
 
 class AddNoteScreen extends StatefulWidget {
   final String? existingNoteId;
@@ -37,8 +39,11 @@ class AddNoteScreenState extends State<AddNoteScreen> {
     final user = widget.auth.currentUser;
 
     if(text.isNotEmpty){
+      final trace = FirebasePerformance.instance.newTrace('save_note');
+      await trace.start();    // Benutzerdefinierter Performance-Trace erzeugen und starten
 
-      if (widget.existingNoteId != null){
+      try{
+        if (widget.existingNoteId != null){
         // Update der vorhandenen Notiz:
         await widget.firestore
         .collection('notes')
@@ -48,6 +53,7 @@ class AddNoteScreenState extends State<AddNoteScreen> {
             'timestamp': FieldValue.serverTimestamp(),
           }
         );
+        trace.putAttribute('operation', 'update/modify');
       } else{
         // Sonst: neue Notiz
         // Notiz abn Firebase schicken und in Firebase speichern 
@@ -56,6 +62,10 @@ class AddNoteScreenState extends State<AddNoteScreen> {
           'timestamp': FieldValue.serverTimestamp(),
           'userId': user?.uid,
         });
+        trace.putAttribute('operation', 'new note');
+      }
+      } finally{
+        await trace.stop();   // Performance trace wird auch bei Fehlern sicher gestoppt (wenn notiz nicht gespeichert oder aktualisiert werden konnte)
       }
 
        if (!mounted) return; //schützt vor ungültigem Kontext

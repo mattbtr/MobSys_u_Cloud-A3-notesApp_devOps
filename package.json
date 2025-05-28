@@ -1,0 +1,28 @@
+{
+  "name": "firestore-backup",
+  "version": "1.0.0",
+  "description": "script to backup firebase DB with firebase-admin sdk via npm",
+  "main": "firestore-backup.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattbtr/MobSys_u_Cloud-A3-notesApp_devOps.git"
+  },
+  "author": "Matthias Beiter",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattbtr/MobSys_u_Cloud-A3-notesApp_devOps/issues"
+  },
+  "homepage": "https://github.com/mattbtr/MobSys_u_Cloud-A3-notesApp_devOps#readme",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "firebase-admin": "^13.4.0"
+  },
+  "type": "module"
+}

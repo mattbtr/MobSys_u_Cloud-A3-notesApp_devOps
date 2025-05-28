@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'mobsysucloud-aufgabe2.firebasestorage.app',
     measurementId: 'G-2J0C2QJNVG',
   );
+
 }
