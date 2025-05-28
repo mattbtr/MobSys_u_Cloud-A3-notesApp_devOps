@@ -13,7 +13,7 @@ git merge develop   # auf aktuellen stand holen
 
 # Änderungen committen und mergen
 git add .
-git commit -m "Feature xyz"
+git commit -m "Feature xyz" und pushen
 git checkout develop
 git merge feature/xyz
 

@@ -19,7 +19,7 @@ jobs:
           node-version: 22.15.0
 
       - name: Install Dependencies
-        run: npm Install
+        run: npm install
 
       - name: Run backup Script
         run: node firestore-backup.js
